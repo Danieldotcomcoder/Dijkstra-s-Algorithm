@@ -12,6 +12,11 @@ const Graph = () => {
   const extraRenderers = [new CSS2DRenderer()];
   const [info, setInfo] = useState(Data);
   const [WeightedGraph1, setWeightedGraph1] = useState(null);
+  const [input1, setInput1] = useState(null);
+  const [input2, setInput2] = useState(null);
+  const [shortestPath, setShortestPath]  = useState([])
+
+
   const randomize = () => {
     const newnodes = info.nodes.filter(
       (item) => (item.value = Math.floor(Math.random() * 100 + 1))
@@ -34,8 +39,14 @@ const Graph = () => {
         wg.addEdge(item.source, item.target, item.size);
       }
     });
-   
+
     setWeightedGraph1(wg);
+  };
+
+  const shortestPathbetweentwonodes = (num1, num2) => {
+    let wg1 = new WeightedGraph();
+    wg1 = WeightedGraph1;
+    console.log(wg1.Dijkstra(num1, num2));
   };
 
   useEffect(() => {
@@ -80,6 +91,13 @@ const Graph = () => {
         }}
       />
       <button onClick={() => randomize()}> Randomize</button>
+
+      <input type="number" onChange={(e) => setInput1(e.target.value)} />
+      <input type="number" onChange={(e) => setInput2(e.target.value)} />
+      <button onClick={() => shortestPathbetweentwonodes(input1, input2)}>
+        {' '}
+        ShortestPath
+      </button>
     </div>
   );
 };
