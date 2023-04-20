@@ -1,92 +1,93 @@
 export const Data = {
   nodes: [
     {
-      id: 'id1',
+      id: '1',
       value: 1,
       color: 'lightblue'
     },
     {
-      id: 'id2',
+      id: '2',
       value: 2,
       color: 'lightblue'
     },
     {
-      id: 'id3',
+      id: '3',
       value: 3,
       color: 'lightblue'
     },
     {
-      id: 'id4',
+      id: '4',
       value: 4,
       color: 'lightblue'
     },
     {
-      id: 'id5',
+      id: '5',
       value: 5,
       color: 'lightblue'
     },
     {
-      id: 'id6',
+      id: '6',
       value: 6,
       color: 'lightblue'
     },
     {
-      id: 'id7',
+      id: '7',
       value: 7,
       color: 'lightblue'
     },
     {
-      id: 'id8',
+      id: '8',
       value: 8,
-      color: 'blue'
+      color: 'lightblue'
     },
   ],
   links: [
     {
-      source: 'id1',
-      target: 'id2',
+      source: '1',
+      target: '2',
       size: '4',
     },
     {
-      source: 'id1',
-      target: 'id3',
+      source: '1',
+      target: '3',
       size: '3',
     },
     {
-      source: 'id2',
-      target: 'id3',
+      source: '2',
+      target: '3',
       size: '6',
     },
     {
-      source: 'id4',
-      target: 'id3',
+      source: '4',
+      target: '3',
       size: '2',
     },
     {
-      source: 'id2',
-      target: 'id5',
+      source: '2',
+      target: '5',
       size: '1',
     },
     {
-      source: 'id4',
-      target: 'id6',
+      source: '4',
+      target: '6',
       size: '9',
     },
     {
-      source: 'id4',
-      target: 'id7',
+      source: '4',
+      target: '7',
       size: '6',
     },
     {
-      source: 'id4',
-      target: 'id8',
+      source: '4',
+      target: '8',
       size: '3',
     },
     {
-      source: 'id1',
-      target: 'id7',
+      source: '1',
+      target: '7',
       size: '3',
     },
     
   ],
 };
+

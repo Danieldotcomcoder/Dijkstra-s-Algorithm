@@ -6,20 +6,41 @@ import {
   CSS2DObject,
 } from '//unpkg.com/three/examples/jsm/renderers/CSS2DRenderer.js';
 import { useEffect, useState } from 'react';
+import { WeightedGraph } from './GraphData/Logic';
 
 const Graph = () => {
   const extraRenderers = [new CSS2DRenderer()];
   const [info, setInfo] = useState(Data);
+  const [WeightedGraph1, setWeightedGraph1] = useState(null);
   const randomize = () => {
     const newnodes = info.nodes.filter(
-      (item) => (item.value = Math.floor(Math.random() * (100 - 1 + 1) + 1))
+      (item) => (item.value = Math.floor(Math.random() * 100 + 1))
     );
     const newlinks = info.links.filter(
-      (item) => (item.size = Math.floor(Math.random() * (10) + 1))
+      (item) => (item.size = Math.floor(Math.random() * 10 + 1))
     );
 
     setInfo({ nodes: newnodes, links: newlinks });
   };
+
+  const Addinfo = () => {
+    let wg = new WeightedGraph();
+    info.nodes.map((item) => wg.addVertex(item.value));
+
+    info.links.map((item) => {
+      if (item.source.value) {
+        wg.addEdge(item.source.value, item.target.value, item.size);
+      } else {
+        wg.addEdge(item.source, item.target, item.size);
+      }
+    });
+   
+    setWeightedGraph1(wg);
+  };
+
+  useEffect(() => {
+    Addinfo();
+  }, [info]);
 
   return (
     <div>
@@ -37,9 +58,7 @@ const Graph = () => {
         nodeResolution={15}
         nodeThreeObject={(node) => {
           const nodeEl = document.createElement('div');
-          console.log(node);
           nodeEl.textContent = node.value;
-
           return new CSS2DObject(nodeEl);
         }}
         nodeThreeObjectExtend={true}
