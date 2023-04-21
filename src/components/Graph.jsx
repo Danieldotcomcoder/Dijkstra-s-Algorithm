@@ -99,13 +99,13 @@ const Graph = () => {
   return (
     <div className="graph">
       <ForceGraph3D
-        backgroundColor={'cyan'}
+        backgroundColor={'grey'}
         showNavInfo={true}
         width={1000}
         height={550}
         enableNodeDrag={false}
         graphData={info}
-        linkWidth={0.5}
+        linkWidth={1}
         extraRenderers={extraRenderers}
         linkColor={(link) => {
           return link.color;
