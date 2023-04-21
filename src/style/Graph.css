@@ -1,9 +1,8 @@
 body {
-    
-    padding: 0;
-    width: 1200px;
-    height: 550px;
-    border: 1px solid blue;
+  padding: 0;
+  width: 1200px;
+  height: 550px;
+  border: 1px solid lightblue;
 }
 
 .graph {
@@ -11,10 +10,9 @@ body {
   flex-direction: row;
 }
 
-
 .sidepanel {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .shortest {
@@ -31,7 +29,6 @@ button {
 input {
   width: 152px;
 }
-
 
 .input {
   margin-top: 15%;

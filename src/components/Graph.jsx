@@ -27,7 +27,8 @@ const Graph = () => {
 
     const newlinks = info.links.filter(
       (item) => (
-        (item.size = Math.floor(Math.random() * 20 + 1)), (item.color = 'purple')
+        (item.size = Math.floor(Math.random() * 20 + 1)),
+        (item.color = 'purple')
       )
     );
 
@@ -119,7 +120,7 @@ const Graph = () => {
         nodeResolution={15}
         nodeThreeObject={(node) => {
           const nodeEl = document.createElement('div');
-          nodeEl.className = 'node'
+          nodeEl.className = 'node';
           nodeEl.textContent = node.value;
           return new CSS2DObject(nodeEl);
         }}
@@ -140,11 +141,10 @@ const Graph = () => {
 
           Object.assign(sprite.position, middlePos);
         }}
-       
       />
       <div className="sidepanel">
         <button onClick={() => randomize()}> Randomize</button>
-        <div className='input'>
+        <div className="input">
           {' '}
           <input
             type="number"
