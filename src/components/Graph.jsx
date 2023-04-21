@@ -99,7 +99,7 @@ const Graph = () => {
   return (
     <div className="graph">
       <ForceGraph3D
-        backgroundColor={'grey'}
+        backgroundColor={'cyan'}
         showNavInfo={true}
         width={1000}
         height={550}
