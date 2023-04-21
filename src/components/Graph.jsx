@@ -103,6 +103,7 @@ const Graph = () => {
         showNavInfo={true}
         width={1000}
         height={550}
+        nodeVal={10}
         enableNodeDrag={false}
         graphData={info}
         linkWidth={1}
