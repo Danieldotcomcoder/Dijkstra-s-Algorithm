@@ -1,7 +1,7 @@
 body {
     
     padding: 0;
-    width: 1000px;
+    width: 1200px;
     height: 550px;
     border: 1px solid black;
 }
@@ -15,4 +15,20 @@ body {
 .sidepanel {
     display: flex;
     flex-direction: column;
+}
+
+.shortest {
+  font-size: 13px;
+}
+
+button {
+  width: 152px;
+}
+input {
+  width: 152px;
+}
+
+
+.input {
+  margin-top: 15%;
 }

@@ -15,16 +15,25 @@ const Graph = () => {
   const [input1, setInput1] = useState(null);
   const [input2, setInput2] = useState(null);
   const [shortestPath, setShortestPath] = useState([]);
+  const [error, setError] = useState('');
 
   const randomize = () => {
     const newnodes = info.nodes.filter(
-      (item) => (item.value = Math.floor(Math.random() * 100 + 1))
+      (item) => (
+        (item.value = Math.floor(Math.random() * 1000 + 1)),
+        (item.color = 'lightblue')
+      )
     );
+
     const newlinks = info.links.filter(
-      (item) => (item.size = Math.floor(Math.random() * 10 + 1))
+      (item) => (
+        (item.size = Math.floor(Math.random() * 100 + 1)), (item.color = 'grey')
+      )
     );
 
     setInfo({ nodes: newnodes, links: newlinks });
+    setShortestPath([]);
+    setError('');
   };
 
   const Addinfo = () => {
@@ -45,23 +54,42 @@ const Graph = () => {
   const shortestPathbetweentwonodes = (num1, num2) => {
     let wg1 = new WeightedGraph();
     wg1 = WeightedGraph1;
-    
-    setShortestPath(wg1.Dijkstra(num1, num2));
-    changecolor(wg1.Dijkstra(num1, num2));
+    if (wg1.adjacencyList[num1] && wg1.adjacencyList[num2]) {
+      setShortestPath(wg1.Dijkstra(num1, num2));
+      changecolor(wg1.Dijkstra(num1, num2));
+      setError('');
+    } else {
+      setError('Make sure both nodes exist in graph');
+    }
   };
 
   const changecolor = (shortestPath) => {
     const filternodes = (node) => {
-             
-      if(shortestPath.includes(node.value) === true || shortestPath.includes(node.value.toString()) === true){
-       return node.color = 'red'
+      if (
+        shortestPath.includes(node.value) === true ||
+        shortestPath.includes(node.value.toString()) === true
+      ) {
+        return (node.color = 'red');
       } else {
-        return node.color = 'lightgrey'
+        return (node.color = 'lightblue');
       }
-    }
+    };
+    const filterlinks = (links) => {
+      if (
+        (shortestPath.includes(links.source.value) ||
+          shortestPath.includes(links.source.value.toString())) &&
+        (shortestPath.includes(links.target.value) ||
+          shortestPath.includes(links.target.value.toString()))
+      ) {
+        return (links.color = 'red');
+      } else {
+        return (links.color = 'grey');
+      }
+    };
+    const filteredlinks = info.links.filter(filterlinks);
     const newnodes = info.nodes.filter(filternodes);
 
-    setInfo({ nodes: newnodes, links: info.links });
+    setInfo({ nodes: newnodes, links: filteredlinks });
   };
 
   useEffect(() => {
@@ -69,13 +97,18 @@ const Graph = () => {
   }, [info]);
 
   return (
-    <div className='graph'>
+    <div className="graph">
       <ForceGraph3D
-        width={700}
+        backgroundColor={'black'}
+        width={950}
         height={550}
+        enableNodeDrag={false}
         graphData={info}
-        linkWidth={0.3}
+        linkWidth={0.5}
         extraRenderers={extraRenderers}
+        linkColor={(link) => {
+          return link.color;
+        }}
         nodeLabel={'value'}
         nodeColor={(node) => {
           return node.color;
@@ -85,6 +118,7 @@ const Graph = () => {
         nodeThreeObject={(node) => {
           const nodeEl = document.createElement('div');
           nodeEl.textContent = node.value;
+          nodeEl.textHeight = '1';
           return new CSS2DObject(nodeEl);
         }}
         nodeThreeObjectExtend={true}
@@ -92,7 +126,7 @@ const Graph = () => {
         linkThreeObject={(link) => {
           const sprite = new SpriteText(link.size);
           sprite.color = 'lightgrey';
-          sprite.textHeight = 2.5;
+          sprite.textHeight = 3;
           return sprite;
         }}
         linkPositionUpdate={(sprite, { start, end }) => {
@@ -104,17 +138,30 @@ const Graph = () => {
 
           Object.assign(sprite.position, middlePos);
         }}
+       
       />
-      <div className='sidepanel'>
+      <div className="sidepanel">
         <button onClick={() => randomize()}> Randomize</button>
+        <div className='input'>
+          {' '}
+          <input
+            type="number"
+            onChange={(e) => setInput1(e.target.value)}
+            placeholder="Enter the start node"
+          />
+          <input
+            type="number"
+            onChange={(e) => setInput2(e.target.value)}
+            placeholder="Enter the finish node"
+          />
+        </div>
 
-        <input type="number" onChange={(e) => setInput1(e.target.value)} placeholder='Enter the start node' />
-        <input type="number" onChange={(e) => setInput2(e.target.value)} placeholder='Enter the finish node' />
         <button onClick={() => shortestPathbetweentwonodes(input1, input2)}>
           {' '}
           ShortestPath
         </button>
-        <div>{shortestPath.join('==>')}</div>
+        <div className="shortest">{shortestPath.join('==>')}</div>
+        <div className="error">{error}</div>
       </div>
     </div>
   );
