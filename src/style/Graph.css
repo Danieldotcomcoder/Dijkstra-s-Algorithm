@@ -18,7 +18,11 @@ body {
 }
 
 .shortest {
+  margin-top: 15px;
   font-size: 13px;
+  width: 190px;
+  height: fit-content;
+  word-wrap: break-word;
 }
 
 button {
@@ -31,4 +35,8 @@ input {
 
 .input {
   margin-top: 15%;
+}
+
+.node {
+  font-size: 15px;
 }

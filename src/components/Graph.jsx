@@ -27,7 +27,7 @@ const Graph = () => {
 
     const newlinks = info.links.filter(
       (item) => (
-        (item.size = Math.floor(Math.random() * 100 + 1)), (item.color = 'grey')
+        (item.size = Math.floor(Math.random() * 20 + 1)), (item.color = 'purple')
       )
     );
 
@@ -83,7 +83,7 @@ const Graph = () => {
       ) {
         return (links.color = 'red');
       } else {
-        return (links.color = 'grey');
+        return (links.color = 'purple');
       }
     };
     const filteredlinks = info.links.filter(filterlinks);
@@ -99,8 +99,9 @@ const Graph = () => {
   return (
     <div className="graph">
       <ForceGraph3D
-        backgroundColor={'black'}
-        width={950}
+        backgroundColor={'grey'}
+        showNavInfo={true}
+        width={1000}
         height={550}
         enableNodeDrag={false}
         graphData={info}
@@ -117,15 +118,15 @@ const Graph = () => {
         nodeResolution={15}
         nodeThreeObject={(node) => {
           const nodeEl = document.createElement('div');
+          nodeEl.className = 'node'
           nodeEl.textContent = node.value;
-          nodeEl.textHeight = '1';
           return new CSS2DObject(nodeEl);
         }}
         nodeThreeObjectExtend={true}
         linkThreeObjectExtend={true}
         linkThreeObject={(link) => {
           const sprite = new SpriteText(link.size);
-          sprite.color = 'lightgrey';
+          sprite.color = 'black';
           sprite.textHeight = 3;
           return sprite;
         }}

@@ -106,140 +106,140 @@ export const Data = {
       source: 1,
       target: 2,
       size: 4,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 1,
       target: 3,
       size: 3,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 2,
       target: 3,
       size: 6,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 4,
       target: 3,
       size: 2,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 2,
       target: 5,
       size: 1,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 4,
       target: 6,
       size: 9,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 4,
       target: 7,
       size: 6,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 4,
       target: 8,
       size: 7,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 1,
       target: 7,
       size: 1,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 7,
       target: 9,
       size: 4,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 5,
       target: 9,
       size: 4,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 7,
       target: 10,
       size: 7,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 10,
       target: 11,
       size: 2,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 11,
       target: 12,
       size: 4,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 12,
       target: 13,
       size: 1,
-      color: 'grey'
+      color: 'purple'
     },
 
     {
       source: 10,
       target: 12,
       size: 8,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 9,
       target: 14,
       size: 2,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 9,
       target: 15,
       size: 5,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 14,
       target: 16,
       size: 1,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 14,
       target: 17,
       size: 9,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 14,
       target: 18,
       size: 3,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 14,
       target: 19,
       size: 7,
-      color: 'grey'
+      color: 'purple'
     },
     {
       source: 14,
       target: 20,
       size: 2,
-      color: 'grey'
+      color: 'purple'
     },
   ],
 };
