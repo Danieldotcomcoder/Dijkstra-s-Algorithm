@@ -14,8 +14,7 @@ const Graph = () => {
   const [WeightedGraph1, setWeightedGraph1] = useState(null);
   const [input1, setInput1] = useState(null);
   const [input2, setInput2] = useState(null);
-  const [shortestPath, setShortestPath]  = useState([])
-
+  const [shortestPath, setShortestPath] = useState([]);
 
   const randomize = () => {
     const newnodes = info.nodes.filter(
@@ -46,7 +45,23 @@ const Graph = () => {
   const shortestPathbetweentwonodes = (num1, num2) => {
     let wg1 = new WeightedGraph();
     wg1 = WeightedGraph1;
-    console.log(wg1.Dijkstra(num1, num2));
+    
+    setShortestPath(wg1.Dijkstra(num1, num2));
+    changecolor(wg1.Dijkstra(num1, num2));
+  };
+
+  const changecolor = (shortestPath) => {
+    const filternodes = (node) => {
+             
+      if(shortestPath.includes(node.value) === true || shortestPath.includes(node.value.toString()) === true){
+       return node.color = 'red'
+      } else {
+        return node.color = 'lightgrey'
+      }
+    }
+    const newnodes = info.nodes.filter(filternodes);
+
+    setInfo({ nodes: newnodes, links: info.links });
   };
 
   useEffect(() => {
@@ -54,10 +69,10 @@ const Graph = () => {
   }, [info]);
 
   return (
-    <div>
+    <div className='graph'>
       <ForceGraph3D
         width={700}
-        height={500}
+        height={550}
         graphData={info}
         linkWidth={0.3}
         extraRenderers={extraRenderers}
@@ -90,14 +105,17 @@ const Graph = () => {
           Object.assign(sprite.position, middlePos);
         }}
       />
-      <button onClick={() => randomize()}> Randomize</button>
+      <div className='sidepanel'>
+        <button onClick={() => randomize()}> Randomize</button>
 
-      <input type="number" onChange={(e) => setInput1(e.target.value)} />
-      <input type="number" onChange={(e) => setInput2(e.target.value)} />
-      <button onClick={() => shortestPathbetweentwonodes(input1, input2)}>
-        {' '}
-        ShortestPath
-      </button>
+        <input type="number" onChange={(e) => setInput1(e.target.value)} placeholder='Enter the start node' />
+        <input type="number" onChange={(e) => setInput2(e.target.value)} placeholder='Enter the finish node' />
+        <button onClick={() => shortestPathbetweentwonodes(input1, input2)}>
+          {' '}
+          ShortestPath
+        </button>
+        <div>{shortestPath.join('==>')}</div>
+      </div>
     </div>
   );
 };
