@@ -241,5 +241,11 @@ export const Data = {
       size: 2,
       color: 'purple'
     },
+    {
+      source: 9,
+      target: 10,
+      size: 1,
+      color: 'purple'
+    },
   ],
 };

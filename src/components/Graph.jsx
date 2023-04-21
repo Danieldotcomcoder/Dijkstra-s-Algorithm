@@ -7,6 +7,8 @@ import {
 } from '//unpkg.com/three/examples/jsm/renderers/CSS2DRenderer.js';
 import { useEffect, useState } from 'react';
 import { WeightedGraph } from './GraphData/Logic';
+import scroll from '../assets/scroll.png';
+import left from '../assets/left-click.png';
 
 const Graph = () => {
   const extraRenderers = [new CSS2DRenderer()];
@@ -164,6 +166,16 @@ const Graph = () => {
         </button>
         <div className="shortest">{shortestPath.join('==>')}</div>
         <div className="error">{error}</div>
+        <div className="key">
+          <div className='zoom'>
+            <img width={40} height={35} src={scroll} />
+            <h6>Zoom In/Out</h6>
+          </div>
+          <div className='zoom'>
+          <img width={40} height={35} src={left} />
+            <h6>Click to rotate</h6>
+          </div>
+        </div>
       </div>
     </div>
   );

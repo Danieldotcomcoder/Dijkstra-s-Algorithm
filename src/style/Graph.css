@@ -37,3 +37,20 @@ input {
 .node {
   font-size: 15px;
 }
+
+.key {
+  border: 1px solid green;
+  width: 200px;
+  height: 100px;
+  margin-top: auto;
+  background-color: aquamarine;
+}
+
+.zoom {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid black;
+  height: 49%;
+  align-items: center;
+}
