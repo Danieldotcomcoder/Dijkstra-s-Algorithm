@@ -16,13 +16,17 @@ const Graph = () => {
   const [WeightedGraph1, setWeightedGraph1] = useState(null);
   const [input1, setInput1] = useState(null);
   const [input2, setInput2] = useState(null);
+  const [inputnodevalue, setInputNodeValue] = useState('');
+  const [inputnodelink1, setInputNodeLink1] = useState('');
+  const [inputnodelink2, setInputNodeLink2] = useState('');
+  const [inputnodelinksize, setInputNodeLinkSize] = useState('');
   const [shortestPath, setShortestPath] = useState([]);
   const [error, setError] = useState('');
 
   const randomize = () => {
     const newnodes = info.nodes.filter(
       (item) => (
-        (item.value = Math.floor(Math.random() * 1000 + 1)),
+        (item.value = item.id = Math.floor(Math.random() * 1000 + 1)),
         (item.color = 'lightblue')
       )
     );
@@ -37,6 +41,7 @@ const Graph = () => {
     setInfo({ nodes: newnodes, links: newlinks });
     setShortestPath([]);
     setError('');
+    console.log(info);
   };
 
   const Addinfo = () => {
@@ -93,6 +98,32 @@ const Graph = () => {
     const newnodes = info.nodes.filter(filternodes);
 
     setInfo({ nodes: newnodes, links: filteredlinks });
+  };
+
+  const AddNode = (value, link, size) => {
+    setInfo({
+      nodes: [
+        ...info.nodes,
+        {
+          id: parseInt(value),
+          value: parseInt(value),
+          color: 'lightblue',
+        },
+      ],
+      links: [
+        ...info.links,
+        {
+          source: parseInt(link),
+          target: parseInt(value),
+          size: parseInt(size),
+          color: 'purple',
+        },
+      ],
+    });
+
+    // setInputNodeValue('');
+    // setInputNodeLink1('');
+    // setInputNodeLinkSize('');
   };
 
   useEffect(() => {
@@ -166,13 +197,40 @@ const Graph = () => {
         </button>
         <div className="shortest">{shortestPath.join('==>')}</div>
         <div className="error">{error}</div>
+        <div className="AddNewNode">
+          <input
+            type="number"
+            onChange={(e) => setInputNodeValue(e.target.value)}
+            value={inputnodevalue}
+            placeholder="Enter the node value"
+          />
+          <input
+            type="number"
+            onChange={(e) => setInputNodeLink1(e.target.value)}
+            value={inputnodelink1}
+            placeholder="Enter the node you want to link it to"
+          />
+          <input
+            type="number"
+            onChange={(e) => setInputNodeLinkSize(e.target.value)}
+            value={inputnodelinksize}
+            placeholder="Enter the link size"
+          />
+          <button
+            onClick={() =>
+              AddNode(inputnodevalue, inputnodelink1, inputnodelinksize)
+            }
+          >
+            Add node
+          </button>
+        </div>
         <div className="key">
-          <div className='zoom'>
+          <div className="zoom">
             <img width={40} height={35} src={scroll} />
             <h6>Zoom In/Out</h6>
           </div>
-          <div className='zoom'>
-          <img width={40} height={35} src={left} />
+          <div className="zoom">
+            <img width={40} height={35} src={left} />
             <h6>Click to rotate</h6>
           </div>
         </div>

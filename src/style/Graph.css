@@ -1,6 +1,6 @@
 body {
   padding: 0;
-  width: 1200px;
+  width: 1300px;
   height: 550px;
   border: 1px solid lightblue;
 }
@@ -27,7 +27,7 @@ button {
   width: 152px;
 }
 input {
-  width: 152px;
+  width: 250px;
 }
 
 .input {
@@ -53,4 +53,8 @@ input {
   border-bottom: 1px solid black;
   height: 49%;
   align-items: center;
+}
+
+.AddNewNode {
+  margin-top: 40%;
 }
