@@ -18,7 +18,6 @@ const Graph = () => {
   const [input2, setInput2] = useState(null);
   const [inputnodevalue, setInputNodeValue] = useState('');
   const [inputnodelink1, setInputNodeLink1] = useState('');
-  const [inputnodelink2, setInputNodeLink2] = useState('');
   const [inputnodelinksize, setInputNodeLinkSize] = useState('');
   const [shortestPath, setShortestPath] = useState([]);
   const [error, setError] = useState('');
@@ -26,7 +25,7 @@ const Graph = () => {
   const randomize = () => {
     const newnodes = info.nodes.filter(
       (item) => (
-        (item.value = item.id = Math.floor(Math.random() * 500 + 1)),
+        (item.value = item.id = Math.floor(Math.random() * 850 + 1)),
         (item.color = 'lightblue')
       )
     );
