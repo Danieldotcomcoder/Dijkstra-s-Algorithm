@@ -1,8 +1,9 @@
 body {
   padding: 0;
   width: 1300px;
-  height: 550px;
-  border: 1px solid lightblue;
+  height: 600px;
+  border: 10px solid transparent;
+  box-shadow: 5px 5px 5px 5px rgb(162, 253, 253)
 }
 
 .graph {
@@ -13,9 +14,11 @@ body {
 .sidepanel {
   display: flex;
   flex-direction: column;
+  margin-left: 0.5%;
 }
 
 .shortest {
+  
   margin-top: 15px;
   font-size: 13px;
   width: 190px;
@@ -28,6 +31,7 @@ button {
 }
 input {
   width: 250px;
+  height: 17px;
 }
 
 .input {
@@ -40,10 +44,10 @@ input {
 
 .key {
   border: 1px solid green;
-  width: 200px;
-  height: 100px;
+  width: 145px;
+  height: 75px;
   margin-top: auto;
-  background-color: aquamarine;
+  background-color: lightcyan;
 }
 
 .zoom {
@@ -56,5 +60,5 @@ input {
 }
 
 .AddNewNode {
-  margin-top: 40%;
+  margin-top: 30%;
 }

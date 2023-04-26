@@ -100,6 +100,31 @@ export const Data = {
       value: 20,
       color: 'lightblue',
     },
+    {
+      id: 21,
+      value: 21,
+      color: 'lightblue',
+    },
+    {
+      id: 22,
+      value: 22,
+      color: 'lightblue',
+    },
+    {
+      id: 23,
+      value: 23,
+      color: 'lightblue',
+    },
+    {
+      id: 24,
+      value: 24,
+      color: 'lightblue',
+    },
+    {
+      id: 25,
+      value: 25,
+      color: 'lightblue',
+    },
   ],
   links: [
     {
@@ -244,7 +269,169 @@ export const Data = {
     {
       source: 9,
       target: 10,
-      size: 1,
+      size: 11,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 11,
+      size: 28,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 12,
+      size: 25,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 13,
+      size: 22,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 14,
+      size: 21,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 15,
+      size: 19,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 16,
+      size: 17,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 17,
+      size: 14,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 1,
+      size: 6,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 20,
+      size: 2,
+      color: 'purple'
+    },
+    {
+      source: 7,
+      target: 20,
+      size: 3,
+      color: 'purple'
+    },
+    {
+      source: 8,
+      target: 20,
+      size: 9,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 20,
+      size: 9,
+      color: 'purple'
+    },
+    {
+      source: 10,
+      target: 20,
+      size: 7,
+      color: 'purple'
+    },
+    {
+      source: 19,
+      target: 10,
+      size: 2,
+      color: 'purple'
+    },
+    {
+      source: 19,
+      target: 11,
+      size: 3,
+      color: 'purple'
+    },
+    {
+      source: 15,
+      target: 3,
+      size: 11,
+      color: 'purple'
+    },
+    {
+      source: 12,
+      target: 1,
+      size: 12,
+      color: 'purple'
+    },
+    {
+      source: 11,
+      target: 1,
+      size: 22,
+      color: 'purple'
+    },
+    {
+      source: 9,
+      target: 2,
+      size: 4,
+      color: 'purple'
+    },
+    {
+      source: 2,
+      target: 3,
+      size: 8,
+      color: 'purple'
+    },
+    {
+      source: 20,
+      target: 21,
+      size: 7,
+      color: 'purple'
+    },
+    {
+      source: 3,
+      target: 21,
+      size: 6,
+      color: 'purple'
+    },
+    {
+      source: 21,
+      target: 22,
+      size: 3,
+      color: 'purple'
+    },
+    {
+      source: 22,
+      target: 23,
+      size: 14,
+      color: 'purple'
+    },
+    {
+      source: 23,
+      target: 24,
+      size: 10,
+      color: 'purple'
+    },
+    {
+      source: 24,
+      target: 25,
+      size: 5,
+      color: 'purple'
+    },
+    {
+      source: 18,
+      target: 25,
+      size: 5,
       color: 'purple'
     },
   ],

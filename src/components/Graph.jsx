@@ -26,22 +26,25 @@ const Graph = () => {
   const randomize = () => {
     const newnodes = info.nodes.filter(
       (item) => (
-        (item.value = item.id = Math.floor(Math.random() * 1000 + 1)),
+        (item.value = item.id = Math.floor(Math.random() * 500 + 1)),
         (item.color = 'lightblue')
       )
     );
-
+    
     const newlinks = info.links.filter(
       (item) => (
         (item.size = Math.floor(Math.random() * 20 + 1)),
-        (item.color = 'purple')
+        (item.color = 'purple'),
+        (item.source =
+          info.nodes[Math.floor(Math.random() * info.nodes.length)]),
+        (item.target =
+          info.nodes[Math.floor(Math.random() * info.nodes.length)])
       )
     );
-
+    
     setInfo({ nodes: newnodes, links: newlinks });
     setShortestPath([]);
     setError('');
-    console.log(info);
   };
 
   const Addinfo = () => {
@@ -121,9 +124,9 @@ const Graph = () => {
       ],
     });
 
-    // setInputNodeValue('');
-    // setInputNodeLink1('');
-    // setInputNodeLinkSize('');
+    setInputNodeValue('');
+    setInputNodeLink1('');
+    setInputNodeLinkSize('');
   };
 
   useEffect(() => {
@@ -133,10 +136,10 @@ const Graph = () => {
   return (
     <div className="graph">
       <ForceGraph3D
-        backgroundColor={'grey'}
+        backgroundColor={'lightgrey'}
         showNavInfo={true}
         width={1000}
-        height={550}
+        height={600}
         nodeVal={10}
         enableNodeDrag={false}
         graphData={info}
