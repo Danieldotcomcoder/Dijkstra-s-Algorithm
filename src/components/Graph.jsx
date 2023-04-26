@@ -12,6 +12,7 @@ import left from '../assets/left-click.png';
 
 const Graph = () => {
   const extraRenderers = [new CSS2DRenderer()];
+  // const [uniqueinfo, setUniqueInfo] = useState(info)
   const [info, setInfo] = useState(Data);
   const [WeightedGraph1, setWeightedGraph1] = useState(null);
   const [input1, setInput1] = useState(null);
@@ -24,8 +25,8 @@ const Graph = () => {
 
   const randomize = () => {
     const newnodes = info.nodes.filter(
-      (item) => (
-        (item.value = item.id = Math.floor(Math.random() * 850 + 1)),
+      (item,i) => (
+        (item.value = item.id = Math.floor(Math.random() * 850 + (i+1))),
         (item.color = 'lightblue')
       )
     );
@@ -45,6 +46,7 @@ const Graph = () => {
     setShortestPath([]);
     setError('');
   };
+
 
   const Addinfo = () => {
     let wg = new WeightedGraph();
