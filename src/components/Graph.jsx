@@ -12,7 +12,6 @@ import left from '../assets/left-click.png';
 
 const Graph = () => {
   const extraRenderers = [new CSS2DRenderer()];
-  // const [uniqueinfo, setUniqueInfo] = useState(info)
   const [info, setInfo] = useState(Data);
   const [WeightedGraph1, setWeightedGraph1] = useState(null);
   const [input1, setInput1] = useState('');
