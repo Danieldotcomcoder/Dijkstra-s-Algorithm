@@ -15,8 +15,8 @@ const Graph = () => {
   // const [uniqueinfo, setUniqueInfo] = useState(info)
   const [info, setInfo] = useState(Data);
   const [WeightedGraph1, setWeightedGraph1] = useState(null);
-  const [input1, setInput1] = useState(null);
-  const [input2, setInput2] = useState(null);
+  const [input1, setInput1] = useState('');
+  const [input2, setInput2] = useState('');
   const [inputnodevalue, setInputNodeValue] = useState('');
   const [inputnodelink1, setInputNodeLink1] = useState('');
   const [inputnodelinksize, setInputNodeLinkSize] = useState('');
@@ -25,12 +25,12 @@ const Graph = () => {
 
   const randomize = () => {
     const newnodes = info.nodes.filter(
-      (item,i) => (
-        (item.value = item.id = Math.floor(Math.random() * 850 + (i+1))),
+      (item, i) => (
+        (item.value = item.id = Math.floor(Math.random() * 850 + (i + 1))),
         (item.color = 'lightblue')
       )
     );
-    
+
     const newlinks = info.links.filter(
       (item) => (
         (item.size = Math.floor(Math.random() * 20 + 1)),
@@ -41,12 +41,11 @@ const Graph = () => {
           info.nodes[Math.floor(Math.random() * info.nodes.length)])
       )
     );
-    
+
     setInfo({ nodes: newnodes, links: newlinks });
     setShortestPath([]);
     setError('');
   };
-
 
   const Addinfo = () => {
     let wg = new WeightedGraph();
@@ -70,6 +69,8 @@ const Graph = () => {
       setShortestPath(wg1.Dijkstra(num1, num2));
       changecolor(wg1.Dijkstra(num1, num2));
       setError('');
+      setInput1('');
+      setInput2('');
     } else {
       setError('Make sure both nodes exist in graph');
     }
@@ -186,11 +187,13 @@ const Graph = () => {
           <input
             type="number"
             onChange={(e) => setInput1(e.target.value)}
+            value={input1}
             placeholder="Enter the start node"
           />
           <input
             type="number"
             onChange={(e) => setInput2(e.target.value)}
+            value={input2}
             placeholder="Enter the finish node"
           />
         </div>
