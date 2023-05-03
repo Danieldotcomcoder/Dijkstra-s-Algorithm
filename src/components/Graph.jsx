@@ -243,6 +243,9 @@ const Graph = () => {
             Add node
           </button>
         </div>
+        <div className='RemoveNode'>
+          To Remove: Just click on a Node.
+        </div>
         <div className="key">
           <div className="zoom">
             <img width={40} height={35} src={scroll} />
