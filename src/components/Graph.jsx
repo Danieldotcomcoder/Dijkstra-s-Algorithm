@@ -5,7 +5,7 @@ import {
   CSS2DRenderer,
   CSS2DObject,
 } from '//unpkg.com/three/examples/jsm/renderers/CSS2DRenderer.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { WeightedGraph } from './GraphData/Logic';
 import scroll from '../assets/scroll.png';
 import left from '../assets/left-click.png';
@@ -130,6 +130,18 @@ const Graph = () => {
     setInputNodeLinkSize('');
   };
 
+  const handleRemoveNode = useCallback(
+    (node) => {
+      const newLinks = info.links.filter(
+        (l) => l.source !== node && l.target !== node
+      );
+      const newnodes = info.nodes.filter((n) => n.id !== node.id);
+
+      setInfo({ nodes: newnodes, links: newLinks });
+    },
+    [info, setInfo]
+  );
+
   useEffect(() => {
     Addinfo();
   }, [info]);
@@ -138,6 +150,7 @@ const Graph = () => {
     <div className="graph">
       <ForceGraph3D
         backgroundColor={'lightgrey'}
+        onNodeClick={handleRemoveNode}
         showNavInfo={true}
         width={1000}
         height={600}
