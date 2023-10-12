@@ -32,12 +32,12 @@ const Graph = () => {
       nodeValues.add(value);
       return { ...item, value, id: value, color: 'green' };
     });
-  
+
     let linkCount = {};
     for (let node of newnodes) {
       linkCount[node.id] = 0;
     }
-  
+
     const newlinks = [];
     for (let node of newnodes) {
       let otherNodes = newnodes.filter(
@@ -57,7 +57,7 @@ const Graph = () => {
         linkCount[otherNode.id]++;
       }
     }
-  
+
     for (let node of newnodes) {
       if (linkCount[node.id] < 3) {
         let otherNodes = newnodes.filter(
@@ -85,13 +85,12 @@ const Graph = () => {
         }
       }
     }
-    
-    console.log(newnodes,newlinks)
+
     setInfo({ nodes: newnodes, links: newlinks });
+
     setShortestPath([]);
     setError('');
   };
-  
 
   const Addinfo = () => {
     let wg = new WeightedGraph();
@@ -109,11 +108,13 @@ const Graph = () => {
   };
 
   const shortestPathbetweentwonodes = (num1, num2) => {
-    // setInfo({ nodes: newnodes, links: newlinks });
-    // setShortestPath([]);
     let wg1 = new WeightedGraph();
     wg1 = WeightedGraph1;
     if (wg1.adjacencyList[num1] && wg1.adjacencyList[num2]) {
+      let originalnodes = info.nodes.filter((item) => (item.color = 'green'));
+      let originallinks = info.links.filter((link) => (link.color = 'purple'));
+
+      setInfo({ nodes: originalnodes, links: originallinks });
       setShortestPath(wg1.Dijkstra(num1, num2));
       changecolor(wg1.Dijkstra(num1, num2));
       setError('');
@@ -127,16 +128,27 @@ const Graph = () => {
   const changecolor = (shortestPath) => {
     let index = 0;
     const shortestPathNodesAndLinks = shortestPath.map((nodeValue, i) => {
-      const node = info.nodes.find(node => node.value === nodeValue || node.value.toString() === nodeValue);
-      const links = i < shortestPath.length - 1 ? info.links.filter(link =>
-        (link.source.value === nodeValue || link.source.value.toString() === nodeValue) &&
-        (link.target.value === shortestPath[i + 1] || link.target.value.toString() === shortestPath[i + 1]) ||
-        (link.target.value === nodeValue || link.target.value.toString() === nodeValue) &&
-        (link.source.value === shortestPath[i + 1] || link.source.value.toString() === shortestPath[i + 1])
-      ) : [];
+      const node = info.nodes.find(
+        (node) =>
+          node.value === nodeValue || node.value.toString() === nodeValue
+      );
+      const links =
+        i < shortestPath.length - 1
+          ? info.links.filter(
+              (link) =>
+                ((link.source.value === nodeValue ||
+                  link.source.value.toString() === nodeValue) &&
+                  (link.target.value === shortestPath[i + 1] ||
+                    link.target.value.toString() === shortestPath[i + 1])) ||
+                ((link.target.value === nodeValue ||
+                  link.target.value.toString() === nodeValue) &&
+                  (link.source.value === shortestPath[i + 1] ||
+                    link.source.value.toString() === shortestPath[i + 1]))
+            )
+          : [];
       return { node, links };
     });
-  
+
     const intervalId = setInterval(() => {
       if (index >= shortestPathNodesAndLinks.length) {
         clearInterval(intervalId);
@@ -154,13 +166,11 @@ const Graph = () => {
           }
           setInfo({ nodes: [...info.nodes], links: [...info.links] });
         }
-      }, 400);
+      }, 300);
       index++;
-    }, 500);
+    }, 400);
   };
-  
-  
-  
+
   const AddNode = (value, link, size) => {
     setInfo({
       nodes: [
@@ -300,9 +310,7 @@ const Graph = () => {
             Add node
           </button>
         </div>
-        <div className='RemoveNode'>
-          To Remove: Just click on a Node.
-        </div>
+        <div className="RemoveNode">To Remove: Just click on a Node.</div>
         <div className="key">
           <div className="zoom">
             <img width={40} height={35} src={scroll} />
