@@ -33,77 +33,60 @@ const Graph = () => {
       return { ...item, value, id: value, color: 'green' };
     });
   
-    // Create an empty object to keep track of the number of links for each node
     let linkCount = {};
-  
-    // Initialize the link count to zero for each node
     for (let node of newnodes) {
       linkCount[node.id] = 0;
     }
   
-    // Create an empty array for the links
     const newlinks = [];
-  
-    // Loop through the nodes and create one link for each node
     for (let node of newnodes) {
-      // Choose a random node that is not the same as the current node and has less than 3 links
-      let otherNode;
-      do {
-        otherNode =
-          newnodes[Math.floor(Math.random() * newnodes.length)];
-      } while (
-        otherNode.id === node.id ||
-        linkCount[otherNode.id] >= 3
+      let otherNodes = newnodes.filter(
+        (n) => n.id !== node.id && linkCount[n.id] < 3
       );
-      // Create a link object with a random size and color
-      let link = {
-        size: Math.floor(Math.random() * 20 + 1),
-        color: 'purple',
-        source: node,
-        target: otherNode,
-      };
-      // Add the link to the array
-      newlinks.push(link);
-      // Increment the link count for both nodes
-      linkCount[node.id]++;
-      linkCount[otherNode.id]++;
-    }
-  
-    // Loop through the nodes again and add more random links if possible
-    for (let node of newnodes) {
-      // If the node has less than 3 links, try to find another node to link it to
-      if (linkCount[node.id] < 3) {
-        // Choose a random node that is not the same as the current node, has less than 3 links, and is not already linked to the current node
-        let otherNode;
-        do {
-          otherNode =
-            newnodes[Math.floor(Math.random() * newnodes.length)];
-        } while (
-          otherNode.id === node.id ||
-          linkCount[otherNode.id] >= 3 ||
-          newlinks.some(
-            (link) =>
-              (link.source.id === node.id &&
-                link.target.id === otherNode.id) ||
-              (link.source.id === otherNode.id &&
-                link.target.id === node.id)
-          )
-        );
-        // Create a link object with a random size and color
+      if (otherNodes.length > 0) {
+        let otherNode =
+          otherNodes[Math.floor(Math.random() * otherNodes.length)];
         let link = {
           size: Math.floor(Math.random() * 20 + 1),
           color: 'purple',
           source: node,
           target: otherNode,
         };
-        // Add the link to the array
         newlinks.push(link);
-        // Increment the link count for both nodes
         linkCount[node.id]++;
         linkCount[otherNode.id]++;
       }
     }
   
+    for (let node of newnodes) {
+      if (linkCount[node.id] < 3) {
+        let otherNodes = newnodes.filter(
+          (n) =>
+            n.id !== node.id &&
+            linkCount[n.id] < 3 &&
+            !newlinks.some(
+              (link) =>
+                (link.source.id === node.id && link.target.id === n.id) ||
+                (link.source.id === n.id && link.target.id === node.id)
+            )
+        );
+        if (otherNodes.length > 0) {
+          let otherNode =
+            otherNodes[Math.floor(Math.random() * otherNodes.length)];
+          let link = {
+            size: Math.floor(Math.random() * 20 + 1),
+            color: 'purple',
+            source: node,
+            target: otherNode,
+          };
+          newlinks.push(link);
+          linkCount[node.id]++;
+          linkCount[otherNode.id]++;
+        }
+      }
+    }
+    
+    console.log(newnodes,newlinks)
     setInfo({ nodes: newnodes, links: newlinks });
     setShortestPath([]);
     setError('');
