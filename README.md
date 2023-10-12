@@ -4,5 +4,4 @@ This is a React project I made to visualize Dijkstra-s-Algorithm. It is an algor
 graph
 
 
-![Screenshot 2023-10-12 162548](https://github.com/Danieldotcomcoder/Dijkstra-s-Algorithm/assets/87448628/8c3dee32-9edc-481e-a1f7-6087c738402c)
-
+![Algo2](https://github.com/Danieldotcomcoder/Dijkstra-s-Algorithm/assets/87448628/a2e9f307-cb41-4b49-856f-e3a911a99d70)
