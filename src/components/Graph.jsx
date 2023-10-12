@@ -109,6 +109,8 @@ const Graph = () => {
   };
 
   const shortestPathbetweentwonodes = (num1, num2) => {
+    // setInfo({ nodes: newnodes, links: newlinks });
+    // setShortestPath([]);
     let wg1 = new WeightedGraph();
     wg1 = WeightedGraph1;
     if (wg1.adjacencyList[num1] && wg1.adjacencyList[num2]) {
@@ -124,43 +126,41 @@ const Graph = () => {
 
   const changecolor = (shortestPath) => {
     let index = 0;
+    const shortestPathNodesAndLinks = shortestPath.map((nodeValue, i) => {
+      const node = info.nodes.find(node => node.value === nodeValue || node.value.toString() === nodeValue);
+      const links = i < shortestPath.length - 1 ? info.links.filter(link =>
+        (link.source.value === nodeValue || link.source.value.toString() === nodeValue) &&
+        (link.target.value === shortestPath[i + 1] || link.target.value.toString() === shortestPath[i + 1]) ||
+        (link.target.value === nodeValue || link.target.value.toString() === nodeValue) &&
+        (link.source.value === shortestPath[i + 1] || link.source.value.toString() === shortestPath[i + 1])
+      ) : [];
+      return { node, links };
+    });
+  
     const intervalId = setInterval(() => {
-      if (index >= info.nodes.length && index >= info.links.length) {
+      if (index >= shortestPathNodesAndLinks.length) {
         clearInterval(intervalId);
         return;
       }
-      if (index < info.nodes.length) {
-        const node = info.nodes[index];
-        if (
-          shortestPath.includes(node.value) === true ||
-          shortestPath.includes(node.value.toString()) === true
-        ) {
-          node.color = 'red';
-        } else {
-          node.color = 'lightblue';
-        }
+      const { node, links } = shortestPathNodesAndLinks[index];
+      if (node) {
+        node.color = 'red';
+        setInfo({ nodes: [...info.nodes], links: [...info.links] });
       }
-      if (index < info.links.length) {
-        const link = info.links[index];
-        if (
-          (shortestPath.includes(link.source.value) ||
-            shortestPath.includes(link.source.value.toString())) &&
-          (shortestPath.includes(link.target.value) ||
-            shortestPath.includes(link.target.value.toString()))
-        ) {
-          link.color = 'red';
-        } else {
-          link.color = 'purple';
+      setTimeout(() => {
+        if (links.length > 0) {
+          for (let link of links) {
+            link.color = 'blue';
+          }
+          setInfo({ nodes: [...info.nodes], links: [...info.links] });
         }
-      }
-      setInfo({ nodes: [...info.nodes], links: [...info.links] });
+      }, 400);
       index++;
-    }, 150);
+    }, 500);
   };
-    
-
-
-    
+  
+  
+  
   const AddNode = (value, link, size) => {
     setInfo({
       nodes: [
@@ -168,7 +168,7 @@ const Graph = () => {
         {
           id: parseInt(value),
           value: parseInt(value),
-          color: 'lightblue',
+          color: 'green',
         },
       ],
       links: [
