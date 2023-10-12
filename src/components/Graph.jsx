@@ -23,28 +23,92 @@ const Graph = () => {
   const [error, setError] = useState('');
 
   const randomize = () => {
-    const newnodes = info.nodes.filter(
-      (item, i) => (
-        (item.value = item.id = Math.floor(Math.random() * 850 + (i + 1))),
-        (item.color = 'lightblue')
-      )
-    );
-
-    const newlinks = info.links.filter(
-      (item) => (
-        (item.size = Math.floor(Math.random() * 20 + 1)),
-        (item.color = 'purple'),
-        (item.source =
-          info.nodes[Math.floor(Math.random() * info.nodes.length)]),
-        (item.target =
-          info.nodes[Math.floor(Math.random() * info.nodes.length)])
-      )
-    );
-
+    let nodeValues = new Set();
+    const newnodes = info.nodes.map((item, i) => {
+      let value;
+      do {
+        value = Math.floor(Math.random() * 850 + (i + 1));
+      } while (nodeValues.has(value));
+      nodeValues.add(value);
+      return { ...item, value, id: value, color: 'green' };
+    });
+  
+    // Create an empty object to keep track of the number of links for each node
+    let linkCount = {};
+  
+    // Initialize the link count to zero for each node
+    for (let node of newnodes) {
+      linkCount[node.id] = 0;
+    }
+  
+    // Create an empty array for the links
+    const newlinks = [];
+  
+    // Loop through the nodes and create one link for each node
+    for (let node of newnodes) {
+      // Choose a random node that is not the same as the current node and has less than 3 links
+      let otherNode;
+      do {
+        otherNode =
+          newnodes[Math.floor(Math.random() * newnodes.length)];
+      } while (
+        otherNode.id === node.id ||
+        linkCount[otherNode.id] >= 3
+      );
+      // Create a link object with a random size and color
+      let link = {
+        size: Math.floor(Math.random() * 20 + 1),
+        color: 'purple',
+        source: node,
+        target: otherNode,
+      };
+      // Add the link to the array
+      newlinks.push(link);
+      // Increment the link count for both nodes
+      linkCount[node.id]++;
+      linkCount[otherNode.id]++;
+    }
+  
+    // Loop through the nodes again and add more random links if possible
+    for (let node of newnodes) {
+      // If the node has less than 3 links, try to find another node to link it to
+      if (linkCount[node.id] < 3) {
+        // Choose a random node that is not the same as the current node, has less than 3 links, and is not already linked to the current node
+        let otherNode;
+        do {
+          otherNode =
+            newnodes[Math.floor(Math.random() * newnodes.length)];
+        } while (
+          otherNode.id === node.id ||
+          linkCount[otherNode.id] >= 3 ||
+          newlinks.some(
+            (link) =>
+              (link.source.id === node.id &&
+                link.target.id === otherNode.id) ||
+              (link.source.id === otherNode.id &&
+                link.target.id === node.id)
+          )
+        );
+        // Create a link object with a random size and color
+        let link = {
+          size: Math.floor(Math.random() * 20 + 1),
+          color: 'purple',
+          source: node,
+          target: otherNode,
+        };
+        // Add the link to the array
+        newlinks.push(link);
+        // Increment the link count for both nodes
+        linkCount[node.id]++;
+        linkCount[otherNode.id]++;
+      }
+    }
+  
     setInfo({ nodes: newnodes, links: newlinks });
     setShortestPath([]);
     setError('');
   };
+  
 
   const Addinfo = () => {
     let wg = new WeightedGraph();
@@ -76,34 +140,44 @@ const Graph = () => {
   };
 
   const changecolor = (shortestPath) => {
-    const filternodes = (node) => {
-      if (
-        shortestPath.includes(node.value) === true ||
-        shortestPath.includes(node.value.toString()) === true
-      ) {
-        return (node.color = 'red');
-      } else {
-        return (node.color = 'lightblue');
+    let index = 0;
+    const intervalId = setInterval(() => {
+      if (index >= info.nodes.length && index >= info.links.length) {
+        clearInterval(intervalId);
+        return;
       }
-    };
-    const filterlinks = (links) => {
-      if (
-        (shortestPath.includes(links.source.value) ||
-          shortestPath.includes(links.source.value.toString())) &&
-        (shortestPath.includes(links.target.value) ||
-          shortestPath.includes(links.target.value.toString()))
-      ) {
-        return (links.color = 'red');
-      } else {
-        return (links.color = 'purple');
+      if (index < info.nodes.length) {
+        const node = info.nodes[index];
+        if (
+          shortestPath.includes(node.value) === true ||
+          shortestPath.includes(node.value.toString()) === true
+        ) {
+          node.color = 'red';
+        } else {
+          node.color = 'lightblue';
+        }
       }
-    };
-    const filteredlinks = info.links.filter(filterlinks);
-    const newnodes = info.nodes.filter(filternodes);
-
-    setInfo({ nodes: newnodes, links: filteredlinks });
+      if (index < info.links.length) {
+        const link = info.links[index];
+        if (
+          (shortestPath.includes(link.source.value) ||
+            shortestPath.includes(link.source.value.toString())) &&
+          (shortestPath.includes(link.target.value) ||
+            shortestPath.includes(link.target.value.toString()))
+        ) {
+          link.color = 'red';
+        } else {
+          link.color = 'purple';
+        }
+      }
+      setInfo({ nodes: [...info.nodes], links: [...info.links] });
+      index++;
+    }, 150);
   };
+    
 
+
+    
   const AddNode = (value, link, size) => {
     setInfo({
       nodes: [
