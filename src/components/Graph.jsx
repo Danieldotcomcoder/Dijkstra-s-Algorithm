@@ -9,6 +9,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { WeightedGraph } from './GraphData/Logic';
 import scroll from '../assets/scroll.png';
 import left from '../assets/left-click.png';
+import SpriteText from 'three-spritetext';
+
 
 const Graph = () => {
   const extraRenderers = [new CSS2DRenderer()];
